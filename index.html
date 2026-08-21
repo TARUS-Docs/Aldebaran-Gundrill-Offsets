@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aldebaran Gundrill Offsets | Tarus Applications</title>
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Michigan Wolverines Color Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#fefce8',
+                            100: '#fef9c3',
+                            200: '#fef08a',
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#FFCB05', /* Bright Maize Accent */
+                            600: '#00274C', /* Deep Blue Header/Primary */
+                            700: '#001f3d',
+                            800: '#00182f',
+                            900: '#000f1f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Load Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        /* Custom scrollbar for a polished look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Guide transition logic */
+        .guide-section {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .guide-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Edit Mode Styles */
+        body.editing [contenteditable="true"] {
+            outline: 2px dashed #FFCB05;
+            outline-offset: 4px;
+            border-radius: 4px;
+            background-color: rgba(255, 203, 5, 0.05);
+            transition: all 0.2s;
+        }
+        body.editing [contenteditable="true"]:focus {
+            outline: 2px solid #00274C;
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(0, 39, 76, 0.1);
+        }
+
+        /* Image Optimization & Lightbox Setup */
+        main img {
+            cursor: zoom-in;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            object-fit: contain;
+            max-width: 100%;
+            height: auto;
+        }
+        main img:hover {
+            transform: scale(1.01);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        
+        /* Fullscreen Image Modal */
+        .img-modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 9999; 
+            left: 0; top: 0; 
+            width: 100%; height: 100%; 
+            background-color: rgba(0, 15, 31, 0.9); 
+            backdrop-filter: blur(5px); 
+            opacity: 0; 
+            transition: opacity 0.3s ease; 
+        }
+        .img-modal.show { 
+            display: flex; 
+            opacity: 1; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 20px;
+        }
+        .img-modal-content { 
+            max-width: 95vw; 
+            max-height: 95vh; 
+            border-radius: 8px; 
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); 
+            transform: scale(0.95); 
+            transition: transform 0.3s ease; 
+            cursor: zoom-out;
+            background-color: #fff;
+        }
+        .img-modal.show .img-modal-content { transform: scale(1); }
+        .img-modal-close { 
+            position: absolute; 
+            top: 20px; right: 30px; 
+            color: #FFCB05; 
+            font-size: 40px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: color 0.2s; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .img-modal-close:hover { color: #fff; }
+    </style>
+</head>
+<body class="text-slate-800 h-screen flex overflow-hidden">
+
+    <!-- Fullscreen Image Lightbox -->
+    <div id="image-lightbox-modal" class="img-modal">
+        <span class="img-modal-close" title="Close">&times;</span>
+        <img class="img-modal-content" id="img-modal-target" src="" alt="Expanded View">
+    </div>
+
+    <!-- Mobile Header -->
+    <div class="md:hidden fixed top-0 left-0 right-0 h-16 bg-primary-600 text-white flex items-center justify-between px-4 z-50 shadow-md">
+        <span class="font-bold text-lg tracking-wide truncate">Aldebaran Offsets</span>
+        <div class="flex items-center gap-2">
+            <button id="mobile-menu-btn" class="p-2 focus:outline-none hover:bg-primary-700 rounded">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="bg-primary-600 text-slate-300 w-72 flex-shrink-0 h-full flex flex-col fixed md:relative z-40 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out pt-16 md:pt-0 shadow-xl">
+        <div class="p-6 border-b border-primary-700">
+            <h1 class="text-white font-bold text-xl tracking-wider uppercase">Aldebaran Gundrill Offsets</h1>
+            
+            <div class="mt-4 pt-4 border-t border-primary-700">
+                <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Guide Status</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs text-primary-500 font-bold" id="last-updated-text">Last Updated: Never</span>
+                </div>
+                <button id="reset-guide-btn" onclick="resetToFactory()" class="hidden mt-4 w-full text-xs text-red-300 hover:text-red-200 border border-red-900/50 bg-red-900/30 rounded py-2 transition-colors">
+                    Reset to Factory Defaults
+                </button>
+            </div>
+        </div>
+        
+        <nav class="flex-1 overflow-y-auto py-4">
+            <p class="px-6 text-xs text-slate-400 uppercase tracking-wider font-bold mb-2">Procedures</p>
+            <ul class="space-y-1 mb-6">
+                <li><button onclick="switchGuide('guide-backlash')" id="nav-guide-backlash" class="nav-link w-full text-left px-6 py-3 hover:bg-primary-700 hover:text-white transition-colors border-l-4 border-primary-500 bg-primary-800 text-white font-medium text-sm">1. Mechanical Backlash</button></li>
+                <li><button onclick="switchGuide('guide-resolution')" id="nav-guide-resolution" class="nav-link w-full text-left px-6 py-3 hover:bg-primary-700 hover:text-white transition-colors border-l-4 border-transparent text-slate-300 text-sm">2. Linear Resolution</button></li>
+                <li><button onclick="switchGuide('guide-rotary-resolution')" id="nav-guide-rotary-resolution" class="nav-link w-full text-left px-6 py-3 hover:bg-primary-700 hover:text-white transition-colors border-l-4 border-transparent text-slate-300 text-sm">3. Rotary/Tilt Resolution</button></li>
+                <li><button onclick="switchGuide('guide-squareness')" id="nav-guide-squareness" class="nav-link w-full text-left px-6 py-3 hover:bg-primary-700 hover:text-white transition-colors border-l-4 border-transparent text-slate-300 text-sm">4. Linear Squareness</button></li>
+                <li><button onclick="switchGuide('guide-tram')" id="nav-guide-tram" class="nav-link w-full text-left px-6 py-3 hover:bg-primary-700 hover:text-white transition-colors border-l-4 border-transparent text-slate-300 text-sm">5. Gundrill Spindle Tram</button></li>
+                <li><button onclick="switchGuide('guide-tilt')" id="nav-guide-tilt" class="nav-link w-full text-left px-6 py-3 hover:bg-primary-700 hover:text-white transition-colors border-l-4 border-transparent text-slate-300 text-sm">6. Tilt Axis Home Offset</button></li>
+                <li><button onclick="switchGuide('guide-offsets')" id="nav-guide-offsets" class="nav-link w-full text-left px-6 py-3 hover:bg-primary-700 hover:text-white transition-colors border-l-4 border-transparent text-slate-300 text-sm">7. Aux Spindle Offsets</button></li>
+                <li><button onclick="switchGuide('guide-table-centers')" id="nav-guide-table-centers" class="nav-link w-full text-left px-6 py-3 hover:bg-primary-700 hover:text-white transition-colors border-l-4 border-transparent text-slate-300 text-sm">8. Rotary Table Centers</button></li>
+                <li><button onclick="switchGuide('guide-toolbump')" id="nav-guide-toolbump" class="nav-link w-full text-left px-6 py-3 hover:bg-primary-700 hover:text-white transition-colors border-l-4 border-transparent text-slate-300 text-sm">9. Toolbump Calibration</button></li>
+                <li><button onclick="switchGuide('guide-probe')" id="nav-guide-probe" class="nav-link w-full text-left px-6 py-3 hover:bg-primary-700 hover:text-white transition-colors border-l-4 border-transparent text-slate-300 text-sm">10. Probe Calibration</button></li>
+            </ul>
+
+            <p class="px-6 text-xs text-slate-400 uppercase tracking-wider font-bold mb-2">History & Tracking</p>
+            <ul class="space-y-1">
+                <li>
+                    <button onclick="switchGuide('guide-activity-log')" id="nav-guide-activity-log" class="nav-link w-full text-left px-6 py-3 hover:bg-primary-700 hover:text-white transition-colors border-l-4 border-transparent text-slate-300 text-sm flex justify-between items-center">
+                        Activity Log
+                        <span class="bg-primary-500 text-primary-900 text-[10px] font-bold px-2 py-0.5 rounded-full">Log</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 h-full overflow-y-auto bg-white pt-16 md:pt-0 relative scroll-smooth">
+        
+        <!-- Editable Content Wrapper -->
+        <div id="editable-content-wrapper" class="max-w-4xl mx-auto p-5 sm:p-8 md:p-12 pb-24">
+            
+            <!-- 1. PRE-CAL CHECK: BACKLASH -->
+            <section id="guide-backlash" class="guide-section active">
+                <div class="mb-8 pb-6 border-b border-slate-200">
+                    <span class="text-primary-600 font-bold tracking-widest text-xs uppercase edit-target">Step 1 Foundation</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-3 tracking-tight edit-target">Pre-Cal Check: Mechanical Backlash</h2>
+                    <p class="text-slate-500 text-base md:text-lg edit-target">Perform this check before altering any drive ratios. If there is uncompensated mechanical slop, linear resolution calibration will produce inconsistent results.</p>
+                </div>
+
+                <div class="bg-slate-50 rounded-xl p-5 md:p-6 mb-10 border border-slate-200 shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center edit-target">
+                        <svg class="w-5 h-5 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
+                        Tools Needed
+                    </h3>
+                    <ul class="text-slate-700 text-sm md:text-base space-y-1">
+                        <li class="flex items-start edit-target"><span class="text-primary-600 mr-2 mt-0.5">•</span> Magnetic base and a high-resolution dial indicator (capable of reading 0.0001 inches or 0.001 mm).</li>
+                    </ul>
+                </div>
+
+                <div class="border-l-2 border-slate-200 ml-2 md:ml-8 space-y-12 pb-4">
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">1</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Set Up the Indicator</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Mount the magnetic base securely to the spindle housing, ram, or machine head. Position the indicator stylus against a clean, rigid surface that moves with the opposing machine element (like a 1-2-3 block bolted to the table or a solid fixture). Ensure the stylus is perfectly parallel to the axis of travel to prevent cosine error.</p>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">2</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Pre-load the Indicator <span class="text-red-500 text-sm font-semibold uppercase tracking-wider ml-2">(Critical Step)</span></h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Using the handwheel, jog the axis in one direction (e.g., Positive) until the indicator needle rotates at least one full revolution. This ensures the ball nut is fully engaged against the screw threads in that direction.</p>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">3</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Establish Zero</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Without reversing direction, carefully zero the face of the dial indicator. Next, zero the relative position (or distance-to-go) coordinate on the machine control.</p>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">4</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Move Forward</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Continue moving the axis in the exact same direction (Positive) for a short, specific distance (e.g., 0.100 inches or 2.0 mm) using the handwheel or MDI.</p>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">5</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Reverse to Zero</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Reverse your direction (Negative) and slowly feed the axis back until the machine control display reads exactly 0.0000 again.</p>
+                    </div>
+                    
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">6</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Record the Backlash</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Look at the dial indicator. It should theoretically return to exactly zero. If the needle falls short of zero, that difference is your mechanical backlash (lost motion).</p>
+                        <div class="mt-3 bg-slate-50 p-3 border border-slate-200 rounded font-mono text-sm text-slate-600 edit-target">
+                            Example: If the control reads zero, but the indicator shows 0.0015 inches remaining, the axis has 0.0015 inches of backlash.
+                        </div>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">7</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Verify Consistency</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Repeat this forward-and-back test at least three times. If the backlash number is consistent, it must be compensated for in the machine parameters before proceeding. If the number fluctuates wildly, inspect the machine for loose thrust bearings, a loose encoder coupling, or mechanical binding.</p>
+                    </div>
+                </div>
+
+                <!-- NEXT STEP HANDOFF -->
+                <div class="mt-12 bg-primary-800 rounded-xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6 no-edit border-t-4 border-primary-500">
+                    <div>
+                        <h4 class="font-bold text-primary-500 text-lg mb-1 flex items-center">
+                            <svg class="w-5 h-5 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            Next Step: Handoff
+                        </h4>
+                        <p class="text-slate-300 text-sm md:text-base">Once the axis mechanics are confirmed tight and backlash is documented/compensated, you may proceed to scale the axis in <strong>Linear Resolution</strong>.</p>
+                    </div>
+                    <button onclick="switchGuide('guide-resolution')" class="flex-shrink-0 bg-primary-600 hover:bg-primary-500 text-white px-6 py-2.5 rounded-lg font-medium transition-colors border border-primary-500/30">
+                        Go to Linear Resolution
+                    </button>
+                </div>
+            </section>
+
+            <!-- 2. LINEAR RESOLUTION CALIBRATION -->
+            <section id="guide-resolution" class="guide-section">
+                <div class="mb-8 pb-6 border-b border-slate-200">
+                    <span class="text-primary-600 font-bold tracking-widest text-xs uppercase edit-target">Step 2 Calibration</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-3 tracking-tight edit-target">Linear Resolution</h2>
+                    <p class="text-slate-500 text-base md:text-lg edit-target">This procedure calculates and applies the correct electronic gear ratio so that when the machine is told to move 1 inch, it physically moves precisely 1 inch. This must be verified for the X, Y, Z, and Drill axes.</p>
+                </div>
+
+                <div class="bg-slate-50 rounded-xl p-5 md:p-6 mb-10 border border-slate-200 shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center edit-target">
+                        <svg class="w-5 h-5 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
+                        Tools Needed
+                    </h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-slate-700 text-sm md:text-base">
+                        <li class="flex items-start edit-target"><span class="text-primary-600 mr-2 mt-0.5">•</span> Mag base & high-resolution dial indicator</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-600 mr-2 mt-0.5">•</span> Known Precision Length Standards</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-600 mr-2 mt-0.5">•</span> Long Gundrill spindle plug</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-600 mr-2 mt-0.5">•</span> Indicator Holder Articulating Arm</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-600 mr-2 mt-0.5">•</span> Laptop with Bosch Rexroth IndraWorks Ds</li>
+                    </ul>
+                </div>
+
+                <div class="border-l-2 border-slate-200 ml-2 md:ml-8 space-y-12 pb-4">
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">1</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Record the Current Ratio</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Before making any movements, navigate to Axis Mechanics / Scaling in the drive parameters. Record the exact <strong>Current Input Ratio</strong> and <strong>Current Output Ratio</strong>.</p>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">2</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Measure Physical vs. Control Distance</h4>
+                        <p class="text-slate-700 text-sm md:text-base mb-2 edit-target">Move the axis along your measurement standard (laser, artifact, or precision length standards). Avoid cosine error by ensuring standards are perfectly parallel to the axis of travel.</p>
+                        <ul class="list-disc pl-5 space-y-1 text-slate-700 text-sm md:text-base">
+                            <li class="edit-target">Record the exact distance the machine control says it moved. <strong>(Control Measured Distance)</strong></li>
+                            <li class="edit-target">Record the exact physical distance measured by your standard. <strong>(Standard Actual Distance)</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">3</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Calculate the New Ratio</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target mb-6">Use the interactive calculator below to perform the precise floating-point math required to generate the exact gear ratio.</p>
+
+                        <!-- Interactive Calculator Injection -->
+                        <div class="bg-white border-2 border-primary-500 rounded-xl shadow-md overflow-hidden" contenteditable="false">
+                            <div class="bg-primary-600 text-white px-5 py-3 flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                <h5 class="font-bold tracking-wide">Interactive Scaling Calculator</h5>
+                            </div>
+                            <div class="p-5">
+                                <p class="text-xs text-slate-500 mb-4 font-medium">Enter your measurements. The calculator uses high-precision math to output the exact whole number ratio needed for Bosch drives.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+                                    <div>
+                                        <label class="block text-xs font-bold text-primary-900 uppercase tracking-wider mb-1">Control Measured Dist.</label>
+                                        <input type="number" step="any" id="calc-control" class="w-full border-2 border-slate-200 rounded p-2 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all font-mono" placeholder="e.g. 703.390">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-primary-900 uppercase tracking-wider mb-1">Standard Actual Dist.</label>
+                                        <input type="number" step="any" id="calc-actual" class="w-full border-2 border-slate-200 rounded p-2 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all font-mono" placeholder="e.g. 711.203">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-primary-900 uppercase tracking-wider mb-1">Current Input Ratio</label>
+                                        <input type="number" step="1" id="calc-ratio" class="w-full border-2 border-slate-200 rounded p-2 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all font-mono" placeholder="e.g. 22752822">
+                                    </div>
+                                </div>
+                                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm font-medium text-slate-500">Unrounded Multiplier (Control ÷ Actual)</span>
+                                        <span id="calc-multiplier-result" class="font-mono text-sm text-slate-700 font-bold">0.0000000000</span>
+                                    </div>
+                                    <div class="flex justify-between items-center pt-3 border-t border-slate-200">
+                                        <span class="text-sm font-bold text-primary-900 uppercase tracking-wider">New Input Ratio</span>
+                                        <span id="calc-final-result" class="font-mono text-2xl font-bold text-primary-600 bg-primary-50 px-3 py-1 rounded border border-primary-200">---</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">4</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Update Ratio (Control Specific)</h4>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <!-- Option A: Q Proxy -->
+                            <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 shadow-sm">
+                                <h5 class="font-bold text-slate-800 text-sm uppercase tracking-wide border-b border-slate-200 pb-2 mb-3 flex items-center">
+                                    <span class="bg-primary-600 text-white w-5 h-5 rounded flex items-center justify-center mr-2 text-xs">A</span>
+                                    Digital (Q Proxy / IndraWorks)
+                                </h5>
+                                <ol class="list-decimal pl-5 space-y-2 text-slate-700 text-sm font-medium marker:text-slate-400">
+                                    <li class="edit-target">Disable drives. Switch to Parameter Mode (PM).</li>
+                                    <li class="edit-target">Navigate to: <code class="text-xs bg-slate-100 px-1 border border-slate-300 rounded font-mono text-slate-600 break-words">Motor, drive mechanics, measuring systems > Axis mechanics/scaling</code></li>
+                                    <li class="edit-target">Enter the calculated whole number into the <strong>Input Ratio (S-0-0121)</strong> field. Do not alter <strong>Output Ratio (S-0-0122)</strong>.</li>
+                                    <li class="edit-target">Switch back to Operating Mode (OM).</li>
+                                    <li class="edit-target">Set the absolute position of the encoder to establish the new baseline (via <code class="text-xs bg-slate-100 px-1 border rounded">Position data reference encoder 1</code> > <strong>Set absolute position</strong> in OM). Clear any drive faults that were generated during the mode switch.</li>
+                                </ol>
+                                <img src="IndraWorks%20Ds%20-%20Axis%20mechanics%20_%20scaling%20-%20Linear%20Axis.png" alt="IndraWorks Linear Scaling UI" class="block w-full mt-4 rounded border border-slate-300 shadow-sm bg-white">
+                            </div>
+
+                            <!-- Option B: Mill Proxy -->
+                            <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 shadow-sm">
+                                <h5 class="font-bold text-slate-800 text-sm uppercase tracking-wide border-b border-slate-200 pb-2 mb-3 flex items-center">
+                                    <span class="bg-primary-600 text-white w-5 h-5 rounded flex items-center justify-center mr-2 text-xs">B</span>
+                                    Analog (Mill Proxy)
+                                </h5>
+                                <ol class="list-decimal pl-5 space-y-2 text-slate-700 text-sm font-medium marker:text-slate-400">
+                                    <li class="edit-target">Navigate to Service parameters in the Aldebaran UI.</li>
+                                    <li class="edit-target">Locate the axis resolution scaling parameter.</li>
+                                    <li class="edit-target">Apply scaling factor and save.</li>
+                                    <li class="edit-target">Power cycle the control to ensure scaling is fully applied across coordinate systems.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-emerald-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Enable Drives and Verify</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Turn the drives back on and reset your preset/work offset. Perform one final physical measurement against your standard to verify the machine resolution is now perfectly matched to the physical distance.</p>
+                    </div>
+                </div>
+
+                <!-- Troubleshooting Resolution -->
+                <div class="mt-10 bg-slate-50 border border-slate-200 rounded-xl p-6 shadow-sm">
+                    <h4 class="text-lg font-bold text-slate-800 mb-4 edit-target flex items-center">
+                        <svg class="w-5 h-5 text-slate-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        Troubleshooting Resolution Inconsistencies
+                    </h4>
+                    <p class="text-slate-700 text-sm md:text-base edit-target mb-6">If the machine fails to land on the correct dimension after applying the new Bosch gear ratio, check the following common issues before recalculating.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white border border-slate-200 rounded-lg p-4">
+                            <h5 class="font-bold text-slate-800 text-sm mb-2 edit-target">1. Procedural & Math Errors</h5>
+                            <ul class="list-disc pl-5 space-y-2 text-slate-700 text-sm edit-target">
+                                <li><strong>Math Reversal:</strong> Ensure you divided Control Measured by Standard Actual. Reversing this will double your error.</li>
+                                <li><strong>Dropped Zeros:</strong> Verify the Output Ratio was not accidentally modified (e.g. missing a zero).</li>
+                                <li><strong>Failure to Reset Absolute Position:</strong> Ensure the coordinate system was reset after switching back to Operating Mode.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded-lg p-4">
+                            <h5 class="font-bold text-slate-800 text-sm mb-2 edit-target">2. Mechanical & Hardware Issues</h5>
+                            <ul class="list-disc pl-5 space-y-2 text-slate-700 text-sm edit-target">
+                                <li><strong>Backlash (Lost Motion):</strong> Are you measuring from different directions? Always approach start/end points moving in the exact same direction.</li>
+                                <li><strong>Loose Encoder Coupling:</strong> If measurements are completely erratic on a motor-mounted encoder, the coupling may be slipping.</li>
+                                <li><strong>Dirty/Misaligned Scales:</strong> Clean linear scales and verify read-head LED status to ensure counts aren't dropping.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded-lg p-4">
+                            <h5 class="font-bold text-slate-800 text-sm mb-2 edit-target">3. Measurement Setup Errors</h5>
+                            <ul class="list-disc pl-5 space-y-2 text-slate-700 text-sm edit-target">
+                                <li><strong>Cosine Error:</strong> Is your standard perfectly parallel? If skewed, the machine travels a hypotenuse (always longer). Indicate your standard first.</li>
+                                <li><strong>Thermal Expansion:</strong> Calibrating a "hot" machine results in inaccurate ratios when it cools down.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEXT STEP HANDOFF -->
+                <div class="mt-12 bg-primary-800 rounded-xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6 no-edit border-t-4 border-primary-500">
+                    <div>
+                        <h4 class="font-bold text-primary-500 text-lg mb-1 flex items-center">
+                            <svg class="w-5 h-5 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            Next Step: Handoff
+                        </h4>
+                        <p class="text-slate-300 text-sm md:text-base">With linear X/Y/Z/Drill resolution verified, ensure the B and A axes are accurately scaled. Proceed to <strong>Rotary/Tilt Resolution</strong>.</p>
+                    </div>
+                    <button onclick="switchGuide('guide-rotary-resolution')" class="flex-shrink-0 bg-primary-600 hover:bg-primary-500 text-white px-6 py-2.5 rounded-lg font-medium transition-colors border border-primary-500/30">
+                        Go to Rotary/Tilt Resolution
+                    </button>
+                </div>
+            </section>
+
+            <!-- 3. ROTARY/TILT RESOLUTION -->
+            <section id="guide-rotary-resolution" class="guide-section">
+                <div class="mb-8 pb-6 border-b border-slate-200">
+                    <span class="text-primary-600 font-bold tracking-widest text-xs uppercase edit-target">Step 3 Calibration</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-3 tracking-tight edit-target">Rotary & Tilt Axis Resolution</h2>
+                    <p class="text-slate-500 text-base md:text-lg edit-target">For machines equipped with Rotary (B) and/or Tilt (A) axes, scaling must be mathematically verified to ensure exact angular positioning.</p>
+                </div>
+
+                <div class="bg-slate-50 rounded-xl p-5 md:p-6 mb-10 border border-slate-200 shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center edit-target">
+                        <svg class="w-5 h-5 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
+                        Tools Needed
+                    </h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-slate-700 text-sm md:text-base">
+                        <li class="flex items-start edit-target"><span class="text-primary-600 mr-2 mt-0.5">•</span> Mag base & high-resolution indicator</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-600 mr-2 mt-0.5">•</span> Indicator Holder Articulating Arm</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-600 mr-2 mt-0.5">•</span> Precision Block (clamped) or Shoulder Bolt</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-600 mr-2 mt-0.5">•</span> Precision Rod Cat 50 holder</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-600 mr-2 mt-0.5">•</span> Graphite Z Tube with Metal feet (Tripod)</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-600 mr-2 mt-0.5">•</span> 10mm Tooling Ball & Holder</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-600 mr-2 mt-0.5">•</span> Laptop with Bosch Rexroth IndraWorks Ds installed</li>
+                    </ul>
+                </div>
+
+                <div class="border-l-2 border-slate-200 ml-2 md:ml-8 space-y-12 pb-4">
+                    <div class="mb-4">
+                        <h3 class="text-2xl font-bold text-slate-800 edit-target">Part 1: Rotary Table Resolution</h3>
+                        <p class="text-slate-500 text-sm edit-target mt-1">If the machine lacks a Rotary Table, skip to Part 2.</p>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">1</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Prerequisite: Verify Squareness</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Make sure the "Tilt" axis is physically square before gathering this info. Check with a ceramic square by jogging the Y-axis and tramming the spindle with tilt set at 0°. If the machine is not square in Y, <strong>STOP</strong>. Escalate to supervisor before proceeding.</p>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">2</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Sweep Standard at 0°</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Command the Rotary Table to exactly 0°. Indicate a precision straight edge (or shoulder bolt mounted in a fixture hole) parallel to the machine axis travel.</p>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">3</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Rotate 360° and Verify</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Command the table to rotate a full 360° back to the starting point. Check the exact same surface to see if it is perfectly parallel with the original reading.</p>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">4</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Calculate Error and Correct</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target mb-3">If the reading has drifted, jog the rotary table until the straight edge is parallel again. Look at the rotary axis readout on the screen to determine the angular error. Adjust the Rotary Resolution scaling to eliminate this mathematical drift.</p>
+                        
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 shadow-sm">
+                            <h5 class="font-bold text-slate-800 text-sm uppercase tracking-wide border-b border-slate-200 pb-2 mb-3">IndraWorks Update Path</h5>
+                            <p class="text-slate-700 text-sm mb-3">Navigate to the <strong>Scaling extended</strong> tab for the Rotary Table axis to update resolution ratios.</p>
+                            <img src="IndraWorks%20Ds%20-%20Axis%20mechanics%20_%20scaling%20extended%20-Rotary%20Table.png" alt="IndraWorks Rotary Scaling UI" class="block w-full rounded border border-slate-300 shadow-sm bg-white">
+                        </div>
+                    </div>
+
+                    <div class="mb-4 mt-12 pt-8 border-t border-slate-200">
+                        <h3 class="text-2xl font-bold text-slate-800 edit-target">Part 2: Tilt Axis Resolution</h3>
+                        <p class="text-slate-500 text-sm edit-target mt-1">If the machine lacks a Tilt head, skip to Next Step.</p>
+                    </div>
+
+                    <!-- MACHINE VS PART COORDINATES CRITICAL NOTE -->
+                    <div class="bg-amber-50 rounded-xl p-5 border border-amber-200 shadow-sm my-6 flex items-start gap-4">
+                        <div class="bg-amber-100 p-2 rounded-lg text-amber-700 flex-shrink-0 mt-0.5">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-amber-900 text-base uppercase tracking-wide edit-target">CRITICAL: Part vs. Machine Coordinates</h4>
+                            <div class="text-amber-800 text-sm md:text-base mt-2 space-y-2 edit-target">
+                                <p>When gathering coordinates or executing movements for this calibration, you <strong>MUST use the Machine Position</strong> coordinate system, NOT the Part Position (G54-G59). Using a shifted part origin will cause the algebraic circle-fit math to fail completely.</p>
+                                <ul class="list-disc pl-5 space-y-1 font-medium">
+                                    <li><strong>Rotary Axis Wrap:</strong> The Rotary axis can spin 720°+, but the readout wraps at 360°. Always execute back to true Machine Zero to prevent wrap-around math errors during calibration.</li>
+                                    <li><strong>Tilt Axis Envelope:</strong> The Tilt head has strict hard and soft limits restricting travel to <strong>+15° to -15°</strong>. Never command travel beyond this envelope.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">5</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Collect 5-Point Angular Data</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target mb-3">Set up a tripod indicator on the table high enough/close enough to reach the tooling ball at 0°, +15°, and -15° Tilt angles.</p>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-700 text-sm md:text-base">
+                            <li class="edit-target">With tilt at <strong>0°</strong>, move the tooling ball to 0,0,0 on the tripod stand. Record <strong>Machine Position</strong> Y, Z, and Tilt.</li>
+                            <li class="edit-target">Repeat this exactly for <strong>-15°, -7.5°, +7.5°, and +15°</strong>.</li>
+                        </ul>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">6</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Calculate & Apply Resolution Scaling</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target mb-6">Enter your 5 data sets into the interactive kinematic calculator below to determine the exact Tilt Resolution error. The algorithm automatically fits the circle to determine the physical angle swept.</p>
+                        
+                        <!-- Interactive Pure Tilt Resolution Calculator -->
+                        <div class="bg-white border-2 border-primary-500 rounded-xl shadow-md overflow-hidden mb-6" contenteditable="false">
+                            <div class="bg-primary-600 text-white px-5 py-3 flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                    <h5 class="font-bold tracking-wide">Tilt Resolution Kåsa-Fit Calculator</h5>
+                                </div>
+                                <span class="text-xs font-bold bg-primary-700 px-2 py-1 rounded border border-primary-500/50">Interactive</span>
+                            </div>
+                            
+                            <div class="flex flex-col xl:flex-row">
+                                <!-- LEFT COLUMN: SOURCE INPUTS -->
+                                <div class="p-5 xl:w-3/5 bg-slate-50 border-b xl:border-b-0 xl:border-r border-slate-200">
+                                    
+                                    <label class="block text-xs font-bold text-primary-900 mb-2">5-Point Sweep Coordinates</label>
+                                    <div class="bg-white border border-slate-200 rounded-lg overflow-hidden">
+                                        <table class="w-full text-sm text-left">
+                                            <thead class="bg-slate-100 text-xs uppercase font-semibold text-slate-600 border-b border-slate-200">
+                                                <tr>
+                                                    <th class="px-3 py-2 w-1/4 text-center">Angle</th>
+                                                    <th class="px-3 py-2 w-1/4 text-center">Y Axis</th>
+                                                    <th class="px-3 py-2 w-1/4 text-center">Z Axis</th>
+                                                    <th class="px-3 py-2 w-1/4 text-center">Tilt Axis</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="divide-y divide-slate-100 font-mono">
+                                                <tr>
+                                                    <td class="px-3 py-2 text-center font-bold text-slate-700 bg-slate-50">0°</td>
+                                                    <td class="px-2 py-1"><input type="number" id="kin-y-0" class="w-full border border-slate-200 rounded px-2 py-1 text-xs focus:ring-1 focus:ring-primary-500 outline-none text-center"></td>
+                                                    <td class="px-2 py-1"><input type="number" id="kin-z-0" class="w-full border border-slate-200 rounded px-2 py-1 text-xs focus:ring-1 focus:ring-primary-500 outline-none text-center"></td>
+                                                    <td class="px-2 py-1"><input type="number" id="kin-t-0" class="w-full border border-slate-200 rounded px-2 py-1 text-xs focus:ring-1 focus:ring-primary-500 outline-none text-center"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-3 py-2 text-center font-bold text-slate-700 bg-slate-50">-15°</td>
+                                                    <td class="px-2 py-1"><input type="number" id="kin-y-1" class="w-full border border-slate-200 rounded px-2 py-1 text-xs focus:ring-1 focus:ring-primary-500 outline-none text-center"></td>
+                                                    <td class="px-2 py-1"><input type="number" id="kin-z-1" class="w-full border border-slate-200 rounded px-2 py-1 text-xs focus:ring-1 focus:ring-primary-500 outline-none text-center"></td>
+                                                    <td class="px-2 py-1"><input type="number" id="kin-t-1" class="w-full border border-slate-200 rounded px-2 py-1 text-xs focus:ring-1 focus:ring-primary-500 outline-none text-center"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-3 py-2 text-center font-bold text-slate-700 bg-slate-50">-7.5°</td>
+                                                    <td class="px-2 py-1"><input type="number" id="kin-y-2" class="w-full border border-slate-200 rounded px-2 py-1 text-xs focus:ring-1 focus:ring-primary-500 outline-none text-center"></td>
+                                                    <td class="px-2 py-1"><input type="number" id="kin-z-2" class="w-full border border-slate-200 rounded px-2 py-1 text-xs focus:ring-1 focus:ring-primary-500 outline-none text-center"></td>
+                                                    <td class="px-2 py-1"><input type="number" id="kin-t-2" class="w-full border border-slate-200 rounded px-2 py-1 text-xs focus:ring-1 focus:ring-primary-500 outline-none text-center"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-3 py-2 text-center font-bold text-slate-700 bg-slate-50">+7.5°</td>
+                                                    <td class="px-2 py-1"><input type="number" id="kin-y-3" class="w-full border border-slate-200 rounded px-2 py-1 text-xs focus:ring-1 focus:ring-primary-500 outline-none text-center"></td>
+                                                    <td class="px-2 py-1"><input type="number" id="kin-z-3" class="w-full border border-slate-200 rounded px-2 py-1 text-xs focus:ring-1 focus:ring-primary-500 outline-none text-center"></td>
+                                                    <td class="px-2 py-1"><input type="number" id="kin-t-3" class="w-full border border-slate-200 rounded px-2 py-1 text-xs focus:ring-1 focus:ring-primary-500 outline-none text-center"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-3 py-2 text-center font-bold text-slate-700 bg-slate-50">+15°</td>
+                                                    <td class="px-2 py-1"><input type="number" id="kin-y-4" class="w-full border border-slate-200 rounded px-2 py-1 text-xs focus:ring-1 focus:ring-primary-500 outline-none text-center"></td>
+                                                    <td class="px-2 py-1"><input type="number" id="kin-z-4" class="w-full border border-slate-200 rounded px-2 py-1 text-xs focus:ring-1 focus:ring-primary-500 outline-none text-center"></td>
+                                                    <td class="px-2 py-1"><input type="number" id="kin-t-4" class="w-full border border-slate-200 rounded px-2 py-1 text-xs focus:ring-1 focus:ring-primary-500 outline-none text-center"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                    <button onclick="calculateKinematics()" class="mt-6 w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-4 rounded-lg shadow transition-colors flex justify-center items-center">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                        Calculate Resolution
+                                    </button>
+                                </div>
+
+                                <!-- RIGHT COLUMN: RESULTS OUTPUTS -->
+                                <div class="p-5 xl:w-2/5 bg-white relative flex flex-col justify-center">
+                                    <h6 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 border-b border-slate-200 pb-2">Scaling Results</h6>
+                                    
+                                    <div class="space-y-4">
+                                        <!-- Tilt Results -->
+                                        <div class="border border-slate-200 rounded-lg p-4 bg-slate-50">
+                                            <div class="flex justify-between items-center mb-3">
+                                                <span class="text-sm text-slate-600 font-medium">Physical Angle (Actual)</span>
+                                                <span id="res-tilt-actual" class="font-mono font-bold text-sm text-slate-900 bg-white px-2 py-1 rounded border border-slate-200 min-w-[80px] text-right">0.0000°</span>
+                                            </div>
+                                            <div class="flex justify-between items-center mb-4">
+                                                <span class="text-sm text-slate-600 font-medium">Readout Angle (Measured)</span>
+                                                <span id="res-tilt-measured" class="font-mono font-bold text-sm text-slate-900 bg-white px-2 py-1 rounded border border-slate-200 min-w-[80px] text-right">0.0000°</span>
+                                            </div>
+                                            
+                                            <div class="pt-3 border-t border-slate-200">
+                                                <div class="flex justify-between items-center">
+                                                    <span class="text-sm font-bold text-primary-900 uppercase tracking-wider">Resolution Multiplier</span>
+                                                    <span id="res-tilt-multiplier" class="font-mono text-xl font-bold text-primary-600 bg-primary-50 px-3 py-1 rounded border border-primary-200 shadow-inner">---</span>
+                                                </div>
+                                                <p class="text-[10px] text-slate-500 mt-2 text-right">Multiply Current Ratio by this value.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- IndraWorks Image Guide for Tilt -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 shadow-sm mt-6">
+                            <h5 class="font-bold text-slate-800 text-sm uppercase tracking-wide border-b border-slate-200 pb-2 mb-3">IndraWorks Update Path</h5>
+                            <p class="text-slate-700 text-sm mb-3">Navigate to the <strong>Scaling extended</strong> tab for the Tilt axis to update resolution ratios.</p>
+                            <img src="IndraWorks%20Ds%20-%20Axis%20mechanics%20_%20scaling%20extended%20-Tilt%20Axis.png" alt="IndraWorks Tilt Scaling UI" class="block w-full rounded border border-slate-300 shadow-sm bg-white">
+                        </div>
+
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8 mt-12 pt-4 border-t border-slate-200">
+                        <span class="absolute -left-[17px] top-4 bg-emerald-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 mt-4 edit-target">Verification (Tool Vector Mode)</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">After applying the new resolution ratio, verify tilt accuracy to ensure the math was applied correctly.</p>
+                        <ol class="list-decimal pl-5 mt-2 space-y-1.5 text-slate-700 text-sm md:text-base font-medium marker:text-slate-400">
+                            <li class="edit-target">Ensure tool length and offsets are accurate, then turn on <strong>Tool Vector</strong> mode.</li>
+                            <li class="edit-target">At Tilt=0°, set tooling ball to 0 on all three of the tripod indicators. Preset X, Y, and Z to 0.</li>
+                            <li class="edit-target">Back tooling ball away from the tripod and tilt to one of the test angles.</li>
+                            <li class="edit-target">Execute machine to X,Y,Z 0.000. <em>Ensure tool will not crash into tripod during execute.</em></li>
+                            <li class="edit-target">Read the indicators. They should be <span class="bg-emerald-100 text-emerald-800 px-1.5 rounded">no more than .002 from 0</span>.</li>
+                            <li class="edit-target">Repeat verification at each of the previously checked angles.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- NEXT STEP HANDOFF -->
+                <div class="mt-12 bg-primary-800 rounded-xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6 no-edit border-t-4 border-primary-500">
+                    <div>
+                        <h4 class="font-bold text-primary-500 text-lg mb-1 flex items-center">
+                            <svg class="w-5 h-5 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            Next Step: Handoff
+                        </h4>
+                        <p class="text-slate-300 text-sm md:text-base">Once all axis resolutions (Linear and Rotary) are mathematically true, we can now check the machine's physical squareness. Proceed to <strong>Linear Squareness</strong>.</p>
+                    </div>
+                    <button onclick="switchGuide('guide-squareness')" class="flex-shrink-0 bg-primary-600 hover:bg-primary-500 text-white px-6 py-2.5 rounded-lg font-medium transition-colors border border-primary-500/30">
+                        Go to Linear Squareness
+                    </button>
+                </div>
+            </section>
+
+            <!-- 4. LINEAR SQUARENESS -->
+            <section id="guide-squareness" class="guide-section">
+                <div class="mb-8 pb-6 border-b border-slate-200">
+                    <span class="text-primary-600 font-bold tracking-widest text-xs uppercase edit-target">Step 4 Calibration</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-3 tracking-tight edit-target">Linear Squareness</h2>
+                    <p class="text-slate-500 text-base md:text-lg edit-target">Ensuring orthogonal geometry across the X, Y, and Z axes. Dependent on accurate Linear Resolution.</p>
+                </div>
+
+                <!-- KINEMATICS REMINDER -->
+                <div class="bg-primary-50 border-l-4 border-primary-500 p-4 rounded-r-lg mb-8 shadow-sm flex items-start gap-4">
+                    <div class="bg-primary-100 p-2 rounded-lg text-primary-700 flex-shrink-0 mt-0.5">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="text-primary-900 font-bold text-sm uppercase tracking-wider mb-1 edit-target">Horizontal Kinematics Reminder</h4>
+                        <p class="text-primary-800 text-sm edit-target">Tarus Gundrills are <strong>Horizontal</strong> machines following the Standard Right-Hand Rule:</p>
+                        <ul class="mt-2 space-y-1 text-sm text-primary-900 font-medium">
+                            <li class="edit-target"><span class="bg-primary-200 px-1.5 rounded mr-1">X-Axis:</span> Travels Left / Right</li>
+                            <li class="edit-target"><span class="bg-primary-200 px-1.5 rounded mr-1">Y-Axis:</span> Travels Up / Down (Vertical Column)</li>
+                            <li class="edit-target"><span class="bg-primary-200 px-1.5 rounded mr-1">Z-Axis:</span> Travels In / Out (Towards Workpiece)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 rounded-xl p-5 md:p-6 mb-10 border border-slate-200 shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center edit-target">
+                        <svg class="w-5 h-5 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
+                        Tools Needed
+                    </h3>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-700 text-sm md:text-base">
+                        <li class="flex items-start edit-target"><span class="text-primary-600 mr-2 mt-0.5">•</span> Mag base & high-resolution indicator</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-600 mr-2 mt-0.5">•</span> Indicator Holder Articulating Arm</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-600 mr-2 mt-0.5">•</span> Precision Machine Square (Ceramic/Steel)*</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-600 mr-2 mt-0.5">•</span> Paint Marker / Sharpie</li>
+                    </ul>
+                    <p class="text-xs text-slate-500 mt-3 italic edit-target">*Square must be error verified/inspected before leaving Tarus and must not receive any bumps in transit.</p>
+                </div>
+
+                <div class="border-l-2 border-slate-200 ml-2 md:ml-8 space-y-12 pb-4">
+                    
+                    <!-- YZ Plane -->
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">1</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Check YZ Squareness (Pitch)</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target mb-3">Checks if the vertical column (Y) is leaning forward or backward relative to the ram travel (Z).</p>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-700 text-sm md:text-base">
+                            <li class="edit-target">Mount the indicator in the Aux Spindle.</li>
+                            <li class="edit-target">Place the precision square on the table with the vertical blade facing the spindle (parallel to Z-axis travel).</li>
+                            <li class="edit-target"><strong>Indicate the Z-Axis:</strong> Sweep the base of the square by jogging Z. Tap the square until it is perfectly parallel to Z travel (Zero error).</li>
+                            <li class="edit-target"><strong>Sweep the Y-Axis:</strong> Move the indicator to the vertical blade. Jog Y-axis up and down. Record the error over the measured distance (e.g., +.0015 over 12 inches).</li>
+                        </ul>
+                    </div>
+
+                    <!-- XY Plane -->
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">2</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Check XY Squareness (Roll)</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target mb-3">Checks if the vertical column (Y) is leaning left or right relative to the table travel (X).</p>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-700 text-sm md:text-base">
+                            <li class="edit-target">Rotate the precision square 90 degrees so the vertical blade is parallel to X-axis travel.</li>
+                            <li class="edit-target"><strong>Indicate the X-Axis:</strong> Sweep the base of the square by jogging X. Tap the square until it is perfectly parallel to X travel (Zero error).</li>
+                            <li class="edit-target"><strong>Sweep the Y-Axis:</strong> Move the indicator to the vertical blade. Jog Y-axis up and down. Record the error over the measured distance.</li>
+                        </ul>
+                    </div>
+
+                    <!-- XZ Plane -->
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">3</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Check XZ Squareness (Yaw)</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target mb-3">Checks if the ram (Z) is traveling perfectly perpendicular to the table travel (X).</p>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-700 text-sm md:text-base">
+                            <li class="edit-target">Lay the precision square flat on its side on the table.</li>
+                            <li class="edit-target"><strong>Indicate the X-Axis:</strong> Sweep the front edge of the square by jogging X. Tap until parallel to X travel.</li>
+                            <li class="edit-target"><strong>Sweep the Z-Axis:</strong> Move the indicator to the perpendicular edge of the square. Jog Z-axis in and out. Record the error over the measured distance.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="relative pl-6 md:pl-8 mt-8 border-t border-slate-200 pt-6">
+                        <span class="absolute -left-[17px] top-6 bg-primary-500 text-primary-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">4</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Apply Compensation Matrix</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Once all three planes (YZ, XY, XZ) have been mapped, you must calculate the per-inch error slope and enter the values into the Aldebaran Compensation interface.</p>
+                        <div class="mt-4 bg-slate-50 rounded-xl p-8 border border-slate-200 shadow-sm text-center">
+                            <svg class="w-12 h-12 text-slate-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                            <h3 class="text-lg font-bold text-slate-700 edit-target">Content Pending</h3>
+                            <p class="text-slate-500 text-sm mt-1 edit-target">The specific Aldebaran UI navigation path and compensation entry instructions will be inserted here.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEXT STEP HANDOFF -->
+                <div class="mt-12 bg-primary-800 rounded-xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6 no-edit border-t-4 border-primary-500">
+                    <div>
+                        <h4 class="font-bold text-primary-500 text-lg mb-1 flex items-center">
+                            <svg class="w-5 h-5 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            Next Step: Handoff
+                        </h4>
+                        <p class="text-slate-300 text-sm md:text-base">The machine foundation, scaling, and squareness are now locked. Proceed to align the internal toolpath via <strong>Gundrill Spindle Tram</strong>.</p>
+                    </div>
+                    <button onclick="switchGuide('guide-tram')" class="flex-shrink-0 bg-primary-600 hover:bg-primary-500 text-white px-6 py-2.5 rounded-lg font-medium transition-colors border border-primary-500/30">
+                        Go to Spindle Tram
+                    </button>
+                </div>
+            </section>
+
+            <!-- 5. SPINDLE TRAM -->
+            <section id="guide-tram" class="guide-section">
+                <div class="mb-8 pb-6 border-b border-slate-200">
+                    <span class="text-primary-600 font-bold tracking-widest text-xs uppercase edit-target">Step 5 Calibration</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-3 tracking-tight edit-target">Gundrill Spindle Tram</h2>
+                    <p class="text-slate-500 text-base md:text-lg edit-target">Mechanical alignment of the Gundrill Spindle using front nose bushings and rear chipbox bearings. This ensures the Gundrill is aligned throughout its entire length and forces the tool to drill straight. Independent of Aux Spindle accuracy.</p>
+                </div>
+
+                <div class="bg-slate-50 rounded-xl p-5 md:p-6 mb-10 border border-slate-200 shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center edit-target">
+                        <svg class="w-5 h-5 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        Tools Needed
+                    </h3>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-700 text-sm md:text-base">
+                        <li class="flex items-start edit-target"><span class="text-primary-500 mr-2 mt-0.5">•</span> Gundrill Spindle Plug w/ set screw</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-500 mr-2 mt-0.5">•</span> Precision Rod</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-500 mr-2 mt-0.5">•</span> Rear Chipbox Bearing</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-500 mr-2 mt-0.5">•</span> Front Nose Bushing</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-500 mr-2 mt-0.5">•</span> 2 Interapid Indicators & Mag Bases</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-500 mr-2 mt-0.5">•</span> Allen wrench set (Inch/Metric)</li>
+                        <li class="flex items-start edit-target"><span class="text-primary-500 mr-2 mt-0.5">•</span> 1ft pipe (for breaking bolts free)</li>
+                    </ul>
+                </div>
+
+                <div class="border-l-2 border-slate-200 ml-2 md:ml-8 space-y-12 pb-4">
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">1</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Check Gundrill Nose Face</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Jog Tilt axis to exactly Zero. Remove the nose adapter if mounted. Jog the indicator along the face in X/Y.</p>
+                        <p class="text-slate-700 text-sm md:text-base mt-2 font-medium edit-target">Acceptance Criteria: <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Within .0005 total error</span>. (If greater, Tilt Home Offset must be adjusted).</p>
+                        <img src="How%20to%20Tram%20Gundrill%20Spindle%201.jpg" alt="Checking Nose Face" class="block w-auto mx-auto max-w-full max-h-[450px] rounded-xl border border-slate-200 mt-5 shadow-sm bg-white">
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">2</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Tram I.D. of Bearing</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">With the plug in the GD Spindle and indicator mounted, tram the I.D of the Bearing. To adjust, loosen mounting screws (leave 1 tight to pivot). Use a brass drift to tap and correct up/down & left/right error.</p>
+                        <p class="text-slate-700 text-sm md:text-base mt-2 font-medium edit-target">Acceptance Criteria: <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Under .0005 total error</span>.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+                            <img src="How%20to%20Tram%20Gundrill%20Spindle%202.jpg" alt="Tram I.D." class="w-full h-auto max-h-[350px] object-contain rounded-xl border border-slate-200 shadow-sm bg-white">
+                            <img src="How%20to%20Tram%20Gundrill%20Spindle%203.jpg" alt="Tram I.D." class="w-full h-auto max-h-[350px] object-contain rounded-xl border border-slate-200 shadow-sm bg-white">
+                        </div>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">3</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Check Face of Bearing</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Check the face of the bearing. If error is excessive, shim stock may be needed, or remove the bearing to stone & clean behind it.</p>
+                        <p class="text-slate-700 text-sm md:text-base mt-2 font-medium edit-target">Acceptance Criteria: <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Within .0010 total error</span>.</p>
+                        <div class="mt-4 bg-amber-50 p-4 rounded-xl border border-amber-200 text-sm text-amber-900 shadow-sm flex items-start gap-3">
+                            <svg class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            <div class="edit-target"><strong>Pro-Tip:</strong> The bearing might have been taper ground from the factory. Use a paint marker to identify the "top" of the bearing to ensure consistent orientation when remounting.</div>
+                        </div>
+                        <img src="How%20to%20Tram%20Gundrill%20Spindle%204.jpg" alt="Checking Face" class="block w-auto mx-auto max-w-full max-h-[450px] rounded-xl border border-slate-200 mt-5 shadow-sm bg-white">
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">4</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Install Bushings & Inspection Rod</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Install the Rear Chipbox Bushing & Front nose bushing. Insert the Inspection Rod into both and split the length overhang difference equally from the front/rear.</p>
+                        <img src="How%20to%20Tram%20Gundrill%20Spindle%205.jpg" alt="Rod Setup" class="block w-auto mx-auto max-w-full max-h-[450px] rounded-xl border border-slate-200 mt-5 shadow-sm bg-white">
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">5</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Final Verification Sweep</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Set up 2 indicators tight to the bushing (Zero at Top & Side). Check for error by jogging the Z axis. If error exists, adjust the Nose Piece by loosening bolts (leaving 1 tight to pivot).</p>
+                        <div class="mt-4 bg-red-50 p-4 rounded-xl border border-red-200 text-sm text-red-900 shadow-sm flex items-start gap-3">
+                            <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            <div class="edit-target"><strong>CRITICAL:</strong> You MUST jog the machine in the Z axis to inspect this. Moving the rod by hand is incorrect. Adjust until Top & Side read zero both in tight, and out far.</div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+                            <img src="How%20to%20Tram%20Gundrill%20Spindle%206.jpg" alt="Final Setup" class="w-full h-auto max-h-[350px] object-contain rounded-xl border border-slate-200 shadow-sm bg-white">
+                            <img src="How%20to%20Tram%20Gundrill%20Spindle%207.jpg" alt="Final Setup" class="w-full h-auto max-h-[350px] object-contain rounded-xl border border-slate-200 shadow-sm bg-white">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEXT STEP HANDOFF (Not editable to prevent breaking buttons) -->
+                <div class="mt-12 bg-primary-800 rounded-xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6 no-edit border-t-4 border-primary-500">
+                    <div>
+                        <h4 class="font-bold text-lg mb-1 flex items-center text-primary-500">
+                            <svg class="w-5 h-5 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            Next Step: Handoff
+                        </h4>
+                        <p class="text-slate-300 text-sm md:text-base">Once the Gundrill is mechanically aligned along its length, you must ensure its face is perfectly square to the table. Proceed to <strong>Tilt Axis Home Offset</strong>.</p>
+                    </div>
+                    <button onclick="switchGuide('guide-tilt')" class="flex-shrink-0 bg-primary-600 hover:bg-primary-500 text-white px-6 py-2.5 rounded-lg font-medium transition-colors border border-primary-500/30">
+                        Go to Tilt Axis Offset
+                    </button>
+                </div>
+            </section>
+
+            <!-- 6. TILT AXIS HOME OFFSET -->
+            <section id="guide-tilt" class="guide-section">
+                <div class="mb-8 pb-6 border-b border-slate-200">
+                    <span class="text-primary-600 font-bold tracking-widest text-xs uppercase edit-target">Step 6 Calibration</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-3 tracking-tight edit-target">Tilt Axis Home Offset</h2>
+                    <p class="text-slate-500 text-base md:text-lg edit-target">Squares up the face of the Gundrill Nose and the Aux spindle perpendicular to the work piece and table. Vital for preventing steps or tapers during face milling operations.</p>
+                </div>
+
+                <div class="border-l-2 border-slate-200 ml-2 md:ml-8 space-y-12 pb-4">
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">1</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Mechanical Leveling & Sweep Setup</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-700 text-sm md:text-base">
+                            <li class="edit-target">Install precision bar in main spindle. Use torpedo level to jog Tilt axis until approximately horizontal (rough zero).</li>
+                            <li class="edit-target">Remove precision bar. Install collet holder with test indicator ("worm" arm) oriented 90° to spindle centerline.</li>
+                            <li class="edit-target">Place machinist square on table, face towards spindle.</li>
+                        </ul>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">2</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Measure Jog Error</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-700 text-sm md:text-base">
+                            <li class="edit-target">Preload indicator against square (-Z direction). Manually rotate spindle 180° ensuring full contact.</li>
+                            <li class="edit-target">Find highest (+Y) and lowest (-Y) points of indicator arc. Mark these two horizontal lines on the square.</li>
+                            <li class="edit-target">Jog Y-axis to bottom line. Jog Z to touch square and Zero dial.</li>
+                            <li class="edit-target">Jog Y-axis straight up to top line. <strong>Record this value (Jog Error).</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">3</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Sweep & Tilt Correction</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-700 text-sm md:text-base">
+                            <li class="edit-target">Without jogging axes, manually rotate spindle to sweep between the top and bottom marks. Note the TIR (Sweep Error).</li>
+                            <li class="edit-target">Adjust Tilt axis in small increments until Sweep Error exactly matches your recorded Jog Error.</li>
+                            <li class="edit-target"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-medium">The axis is now physically at true zero. Do not move it.</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">4</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Set Home Offset (Control Specific)</h4>
+                        <p class="text-slate-600 text-sm mb-3 edit-target">You must command the drive to accept the current <strong>Machine Position</strong> as permanent zero. The steps differ based on the machine's control type.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <!-- Option A: Q Proxy -->
+                            <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 shadow-sm">
+                                <h5 class="font-bold text-slate-800 text-sm uppercase tracking-wide border-b border-slate-200 pb-2 mb-3 flex items-center">
+                                    <span class="bg-primary-600 text-white w-5 h-5 rounded flex items-center justify-center mr-2 text-xs">A</span>
+                                    Digital (Q Proxy / IndraWorks)
+                                </h5>
+                                <ol class="list-decimal pl-5 space-y-2 text-slate-700 text-sm font-medium marker:text-slate-400">
+                                    <li class="edit-target">End Qproxy service and close Aldebaran.</li>
+                                    <li class="edit-target">Launch IndraWorks and connect to the Tilt axis drive.</li>
+                                    <li class="edit-target">Navigate in the left tree to: <code class="text-xs bg-slate-100 px-1 border border-slate-300 rounded text-slate-700 break-words">Motor, drive mechanics, measuring systems > Encoder 1 / motor encoder > Position data reference encoder 1</code></li>
+                                    <li class="edit-target">Ensure the axis is physically located in the Zero position you just established.</li>
+                                    <li class="edit-target">Ensure the drive is in <strong>Operating Mode (OM)</strong>. Check the top toolbar; if "Set absolute position" is grayed out or throws a C0300 error, click the green OM button to switch from PM.</li>
+                                    <li class="edit-target">Click the <strong>Set absolute position</strong> button (located above "Drive-controlled homing procedure").</li>
+                                    <li class="edit-target">Restart Qproxy, launch Aldebaran, home the machine, and command Tilt to Zero. Re-sweep to verify.</li>
+                                </ol>
+                                
+                                <div class="mt-4 space-y-3">
+                                    <img src="IndraWorks%20Ds%20-%20Position%20data%20reference%20encoder%201%20-Rotary%20Table.png" alt="IndraWorks Set Absolute Position UI" class="block w-full rounded border border-slate-300 shadow-sm bg-white">
+                                    <img src="IndraWorks%20Ds%20-%20Position%20Data%20Reference%20-Rotary%20Axis.png" alt="IndraWorks Operating Mode Error" class="block w-full rounded border border-slate-300 shadow-sm bg-white">
+                                </div>
+                            </div>
+
+                            <!-- Option B: Mill Proxy -->
+                            <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 shadow-sm">
+                                <h5 class="font-bold text-slate-800 text-sm uppercase tracking-wide border-b border-slate-200 pb-2 mb-3 flex items-center">
+                                    <span class="bg-primary-600 text-white w-5 h-5 rounded flex items-center justify-center mr-2 text-xs">B</span>
+                                    Analog (Mill Proxy)
+                                </h5>
+                                <ol class="list-decimal pl-5 space-y-2 text-slate-700 text-sm font-medium marker:text-slate-400">
+                                    <li class="edit-target">Open the Aldebaran service interface on the controller.</li>
+                                    <li class="edit-target">Navigate to: <code class="text-xs bg-slate-100 px-1 border rounded">Service > Axis > Tilt > Limits</code> (or Home Offset).</li>
+                                    <li class="edit-target">Adjust the Home Offset value by the measured error amount to zero the axis.</li>
+                                    <li class="edit-target">Save the configuration and Power Cycle the control to apply.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEXT STEP HANDOFF -->
+                <div class="mt-12 bg-red-50 border-l-4 border-red-500 rounded-r-xl p-6 shadow-md flex flex-col md:flex-row items-center justify-between gap-6 no-edit">
+                    <div>
+                        <h4 class="font-bold text-red-900 text-lg mb-1 flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            CRITICAL POST-PROCEDURE
+                        </h4>
+                        <p class="text-red-800 text-sm md:text-base font-medium">Now that the spindles are physically square to the table, you must map the exact dimensional distance between them. Proceed to <strong>Aux Spindle Offsets</strong>.</p>
+                    </div>
+                    <button onclick="switchGuide('guide-offsets')" class="flex-shrink-0 bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-lg font-medium transition-colors">
+                        Go to Spindle Offsets
+                    </button>
+                </div>
+            </section>
+
+            <!-- 7. SPINDLE OFFSETS -->
+            <section id="guide-offsets" class="guide-section">
+                <div class="mb-8 pb-6 border-b border-slate-200">
+                    <span class="text-primary-600 font-bold tracking-widest text-xs uppercase edit-target">Step 7 Calculation</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-3 tracking-tight edit-target">Aux Spindle Offsets</h2>
+                    <p class="text-slate-500 text-base md:text-lg edit-target">Maps out the offsets needed for accuracy from the Aux spindle to the Gundrill. This ensures both spindles share exactly the same coordinates for multi-operation routines.</p>
+                </div>
+
+                <div class="bg-amber-50 rounded-xl p-5 md:p-6 mb-10 border border-amber-200 shadow-sm flex flex-col sm:flex-row items-start gap-4">
+                    <svg class="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div>
+                        <h4 class="font-bold text-amber-900 text-lg edit-target">Prerequisite Check</h4>
+                        <p class="text-amber-800 text-sm md:text-base mt-1 edit-target">Tram and Tilt Axis Home Offset <strong>must be verified</strong> before proceeding. Any changes to them will invalidate these offsets. Tool length should be forced to zero (or <code class="bg-amber-100 px-1 rounded">0.000001</code> if zero is rejected) for all steps below.</p>
+                    </div>
+                </div>
+
+                <div class="border-l-2 border-slate-200 ml-2 md:ml-8 space-y-12 pb-4">
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">Z</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 mt-0.5 edit-target">Z-Axis Offset</h4>
+                        <div class="text-xs font-mono text-slate-500 bg-slate-100 inline-block px-2 py-1 rounded mb-3 border border-slate-200 edit-target">Path: Service > Heads > Gundrill > Pivot Z</div>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-700 text-sm md:text-base">
+                            <li class="edit-target">Insert Cat50 holder into extended Aux Spindle. Touch indicator to Aux Spindle Flange, preload by <strong>0.010"</strong>, and Preset Z-axis to zero.</li>
+                            <li class="edit-target">Insert Nose Bushing/dowel into GD Spindle. Touch indicator to face of GD spindle, jog Z until preload matches <strong>0.010"</strong>.</li>
+                            <li class="edit-target"><strong>Record Z readout value.</strong> Enter into service parameters and verify.</li>
+                        </ul>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">Y</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 mt-0.5 edit-target">Y-Axis Offset</h4>
+                        <div class="text-xs font-mono text-slate-500 bg-slate-100 inline-block px-2 py-1 rounded mb-3 border border-slate-200 edit-target">Path: Service > Heads > Gundrill > Pivot Y</div>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-700 text-sm md:text-base">
+                            <li class="edit-target">Touch indicator to bottom of Aux Spindle dowel. Sweep X left/right to find high point. Preload <strong>0.010"</strong> and Preset Y-axis to zero.</li>
+                            <li class="edit-target">Move indicator to bottom of GD Spindle dowel. Sweep to high point, jog Y until preload matches <strong>0.010"</strong>.</li>
+                            <li class="edit-target"><strong>Record Y readout value.</strong> Enter into service parameters and verify.</li>
+                        </ul>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">X</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 mt-0.5 edit-target">X-Axis Offset</h4>
+                        <div class="text-xs font-mono text-slate-500 bg-slate-100 inline-block px-2 py-1 rounded mb-3 border border-slate-200 edit-target">Path: Service > Heads > Gundrill > Spindle X</div>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-700 text-sm md:text-base">
+                            <li class="edit-target">Touch indicator to side of Aux Spindle dowel. Sweep Y up/down to find high point. Preload <strong>0.010"</strong> and Preset X-axis to zero.</li>
+                            <li class="edit-target">Move indicator to side of GD Spindle dowel. Sweep to high point, jog X until preload matches <strong>0.010"</strong>.</li>
+                            <li class="edit-target"><strong>Record X readout value.</strong> Enter into service parameters and verify.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- NEXT STEP HANDOFF -->
+                <div class="mt-12 bg-primary-800 rounded-xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6 no-edit border-t-4 border-primary-500">
+                    <div>
+                        <h4 class="font-bold text-primary-500 text-lg mb-1 flex items-center">
+                            <svg class="w-5 h-5 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            Next Step: Handoff
+                        </h4>
+                        <p class="text-slate-300 text-sm md:text-base">With the spindles mapped, the machine's core geometry is set. If this machine utilizes 4-axis operations, proceed to <strong>Rotary Table Centers</strong>. If not, jump to <strong>Toolbump Calibration</strong>.</p>
+                    </div>
+                    <button onclick="switchGuide('guide-table-centers')" class="flex-shrink-0 bg-primary-600 hover:bg-primary-500 text-white px-6 py-2.5 rounded-lg font-medium transition-colors border border-primary-500/30">
+                        Go to Rotary Centers
+                    </button>
+                </div>
+            </section>
+
+            <!-- 8. ROTARY TABLE CENTERS -->
+            <section id="guide-table-centers" class="guide-section">
+                <div class="mb-8 pb-6 border-b border-slate-200">
+                    <span class="text-primary-600 font-bold tracking-widest text-xs uppercase edit-target">Step 8 Calibration</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-3 tracking-tight edit-target">Offset Rotary Table Centers</h2>
+                    <p class="text-slate-500 text-base md:text-lg edit-target">Allows a block of material to be setup on one side and then rotated to the other 3 sides for machining without removing the workpiece. Finding absolute center is highly dependent on Tram, Tilt, and Spindle Offsets being spot on.</p>
+                </div>
+
+                <div class="bg-amber-50 rounded-xl p-5 md:p-6 mb-10 border border-amber-200 shadow-sm flex flex-col sm:flex-row items-start gap-4">
+                    <svg class="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div>
+                        <h4 class="font-bold text-amber-900 text-lg edit-target">Prerequisite Check</h4>
+                        <p class="text-amber-800 text-sm md:text-base mt-1 edit-target">Spindle Offsets <strong>must be verified and correct</strong> before continuing.</p>
+                    </div>
+                </div>
+
+                <div class="border-l-2 border-slate-200 ml-2 md:ml-8 space-y-12 pb-4">
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">1</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Find X Table Center Position</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-700 text-sm md:text-base mb-4">
+                            <li class="edit-target">Set straight edge on table at Rotary 0°. Pick up edge in X axis with Edge Finder. Record <strong>First X Position</strong>.</li>
+                            <li class="edit-target">Rotate table 180° and pick up the exact same edge. Record <strong>Second X Position</strong>.</li>
+                            <li class="edit-target">Add the two numbers and divide by 2. This is the X Table Center. Enter this into <code class="bg-slate-100 px-1 border rounded text-xs">Service > Axis > X Axis > Limits</code>.</li>
+                        </ul>
+                        <img src="How%20to%20Offset%20Rotary%20Table%20Centers%20Aldebaran%20Gundrill%201.jpg" alt="X Default Part Offset" class="block w-auto mx-auto max-w-full max-h-[450px] rounded-xl border border-slate-200 shadow-sm bg-white">
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">2</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-2 edit-target">Find Z Table Center Position</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-700 text-sm md:text-base mb-4">
+                            <li class="edit-target">Rotate table to 90° or 270° (part face facing you). Touch edge finder to face. Record Z Machine Position.</li>
+                            <li class="edit-target">Subtract the two X Machine Positions (from Step 2) and divide by 2 (distance of surface to center).</li>
+                            <li class="edit-target">Add: (Distance to center) + (Edge finder length) + (Z Flange Offset) + (Z Machine Position) = Z Table Center. Enter into <code class="bg-slate-100 px-1 border rounded text-xs">Service > Axis > Z Axis > Limits</code>.</li>
+                        </ul>
+                        <img src="How%20to%20Offset%20Rotary%20Table%20Centers%20Aldebaran%20Gundrill%202.jpg" alt="Z Default Part Offset" class="block w-auto mx-auto max-w-full max-h-[450px] rounded-xl border border-slate-200 shadow-sm bg-white">
+                    </div>
+                </div>
+
+                <!-- NEXT STEP HANDOFF -->
+                <div class="mt-12 bg-red-50 border-l-4 border-red-500 rounded-r-xl p-6 shadow-md flex flex-col md:flex-row items-center justify-between gap-6 no-edit">
+                    <div>
+                        <h4 class="font-bold text-red-900 text-lg mb-1 flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            CRITICAL POST-PROCEDURE
+                        </h4>
+                        <p class="text-red-800 text-sm md:text-base font-medium">Any changes made during the alignment phase necessitates a final toolbump reset to guarantee safe tool loads. You <strong>MUST</strong> immediately perform a Toolbump Calibration.</p>
+                    </div>
+                    <button onclick="switchGuide('guide-toolbump')" class="flex-shrink-0 bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-lg font-medium transition-colors">
+                        Go to Toolbump Calibration
+                    </button>
+                </div>
+            </section>
+
+            <!-- 9. TOOLBUMP CALIBRATION -->
+            <section id="guide-toolbump" class="guide-section">
+                <div class="mb-8 pb-6 border-b border-slate-200">
+                    <span class="text-primary-600 font-bold tracking-widest text-xs uppercase edit-target">Step 9 Calibration</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-3 tracking-tight edit-target">Toolbump Calibration</h2>
+                    <p class="text-slate-500 text-base md:text-lg edit-target">The final step to correctly calibrating the machine and turning over an accurate machine to the customer. Techs must complete this whenever ANY of the other procedures are tweaked.</p>
+                </div>
+
+                <div class="bg-primary-50 rounded-xl p-5 md:p-6 mb-10 border border-primary-200 shadow-sm flex flex-col sm:flex-row items-start gap-4">
+                    <svg class="w-6 h-6 text-primary-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div>
+                        <h4 class="font-bold text-primary-900 text-lg edit-target">Prerequisites & Setup</h4>
+                        <ul class="list-disc pl-5 mt-2 space-y-1 text-primary-800 text-sm md:text-base">
+                            <li class="edit-target">Ensure Rotary and Tilt axes are set to Zero.</li>
+                            <li class="edit-target">Use a Twist Drill or Flat End Mill. <strong>No radius tooling.</strong></li>
+                            <li class="edit-target"><em>Note: If performed right after Offsets/Tilt calibration, a Cat50 with dowel or Long Edge Finder is fine, provided length was manually measured and is perfectly accurate.</em></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="border-l-2 border-slate-200 ml-2 md:ml-8 space-y-10 pb-4">
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">1</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-1 edit-target">Measure & Update Tool Rack</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Insert tool into Aux spindle. Manually measure its exact length and enter this value into the Tool Rack for the specific tool being used.</p>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">2</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-1 edit-target">Position Tool over Switch</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Center tool over Tool Bump in X/Y axes. Retract Z-axis to desired starting height (ensure height clears the longest expected tool).</p>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">3</span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-1 edit-target">Run Calibration Routine</h4>
+                        <ul class="list-disc pl-5 mt-1 text-slate-700 text-sm md:text-base">
+                            <li class="edit-target">Navigate: <code class="bg-slate-100 px-1 border rounded text-xs">File > Exit to Service > Devices > Tool Bumps</code>.</li>
+                            <li class="edit-target">Verify your manual tool length appears correctly in the field.</li>
+                            <li class="edit-target">Click <span class="bg-slate-200 px-2 py-0.5 rounded border border-slate-300 shadow-sm text-xs font-semibold">Calibrate Bump and Store Position</span>. Tool will move and touch switch.</li>
+                            <li class="edit-target">Click Apply, then Save (Floppy Disk icon).</li>
+                        </ul>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-8">
+                        <span class="absolute -left-[17px] top-0 bg-emerald-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-white">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </span>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 mb-1 edit-target">Final Verification</h4>
+                        <p class="text-slate-700 text-sm md:text-base edit-target">Return to main user interface. Run a standard automated tool bump routine. <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-medium">Result must be within .002" of manual length.</span></p>
+                    </div>
+                </div>
+
+                <!-- NEXT STEP HANDOFF -->
+                <div class="mt-12 bg-primary-800 rounded-xl p-6 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6 no-edit border-t-4 border-primary-500">
+                    <div>
+                        <h4 class="font-bold text-primary-500 text-lg mb-1 flex items-center">
+                            <svg class="w-5 h-5 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            Next Step: Handoff
+                        </h4>
+                        <p class="text-slate-300 text-sm md:text-base">Toolbump is calibrated. Proceed to <strong>Probe Calibration</strong> if applicable to finalize the machine setup.</p>
+                    </div>
+                    <button onclick="switchGuide('guide-probe')" class="flex-shrink-0 bg-primary-600 hover:bg-primary-500 text-white px-6 py-2.5 rounded-lg font-medium transition-colors border border-primary-500/30">
+                        Go to Probe Calibration
+                    </button>
+                </div>
+            </section>
+
+            <!-- 10. PROBE CALIBRATION -->
+            <section id="guide-probe" class="guide-section">
+                <div class="mb-8 pb-6 border-b border-slate-200">
+                    <span class="text-primary-600 font-bold tracking-widest text-xs uppercase edit-target">Step 10 Calibration</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-3 tracking-tight edit-target">Probe Calibration</h2>
+                    <p class="text-slate-500 text-base md:text-lg edit-target">Ensuring touch probe accuracy for part setup and measurement.</p>
+                </div>
+
+                <div class="bg-slate-50 rounded-xl p-8 mb-10 border border-slate-200 shadow-sm text-center">
+                    <svg class="w-12 h-12 text-slate-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    <h3 class="text-lg font-bold text-slate-700 edit-target">Content Pending</h3>
+                    <p class="text-slate-500 text-sm mt-1 edit-target">The detailed procedure for checking and calibrating the machine probe will be inserted here.</p>
+                </div>
+
+                <!-- COMPLETE HANDOFF -->
+                <div class="mt-12 bg-emerald-800 rounded-xl p-6 text-white shadow-lg flex items-center justify-between gap-6 no-edit border-t-4 border-emerald-500">
+                    <div>
+                        <h4 class="font-bold text-emerald-400 text-lg mb-1 flex items-center">
+                            <svg class="w-5 h-5 text-emerald-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Calibration Complete
+                        </h4>
+                        <p class="text-emerald-100 text-sm md:text-base">The machine is now fully calibrated and accurate for all Gundrill and Aux spindle operations.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ACTIVITY LOG -->
+            <section id="guide-activity-log" class="guide-section no-edit">
+                <div class="mb-8 pb-6 border-b border-slate-200">
+                    <span class="text-primary-600 font-bold tracking-widest text-xs uppercase">Documentation</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-3 tracking-tight">Activity Log</h2>
+                    <p class="text-slate-500 text-base md:text-lg">Record of structural updates, edits, and revisions made to this guide.</p>
+                </div>
+
+                <!-- Styled Log Table -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-10">
+                    <div class="bg-primary-600 text-white px-6 py-4 flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <h3 class="font-semibold text-lg tracking-wide">Document History</h3>
+                    </div>
+                    
+                    <div class="hidden md:grid md:grid-cols-12 gap-4 px-6 py-3 border-b border-slate-200 bg-slate-50 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                        <div class="md:col-span-2">Date</div>
+                        <div class="md:col-span-2">Editor</div>
+                        <div class="md:col-span-8">Changes Made</div>
+                    </div>
+
+                    <div id="log-container" class="divide-y divide-slate-200">
+                        <!-- Logs injected here via JS -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Floating Edit Button -->
+        <button id="fab-edit" onclick="toggleEditMode()" class="fixed bottom-6 right-6 md:bottom-10 md:right-10 bg-primary-600 hover:bg-primary-700 text-white rounded-full p-4 shadow-2xl transition-all duration-300 z-50 flex items-center justify-center group" title="Edit Guide">
+            <svg id="fab-icon-edit" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+            <svg id="fab-icon-save" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            <span id="fab-text" class="max-w-0 overflow-hidden whitespace-nowrap transition-all duration-300 group-hover:max-w-xs group-hover:ml-2 font-medium">Edit Guide</span>
+        </button>
+    </main>
+
+    <script>
+        // Storage Keys
+        const CONTENT_KEY = 'aldebaran_gundrill_content_v9_master';
+        const LOGS_KEY = 'aldebaran_gundrill_logs_v9_master'; 
+        const DATE_KEY = 'aldebaran_gundrill_date_v9_master';
+        
+        let isEditing = false;
+        
+        // Formatted Date Helper
+        function getFormattedDate() {
+            const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
+            return new Date().toLocaleDateString('en-US', dateOptions);
+        }
+
+        // Initial setup logs
+        const INITIAL_LOGS = [
+            { 
+                id: 12, 
+                author: "Admin", 
+                date: getFormattedDate(), 
+                notes: [
+                    "Integrated new IndraWorks Ds Home Offset instructions from Glen.",
+                    "Added explicit coordinate/parameter mode (PM vs OM) warnings.",
+                    "Built dynamic, click-to-expand Image Lightbox engine to fix image scaling issues on desktop and mobile."
+                ] 
+            },
+            { 
+                id: 11, 
+                author: "Admin", 
+                date: "Aug 21, 2026", 
+                notes: [
+                    "Updated Kinematic Calculator to purely calculate Tilt Axis Resolution.",
+                    "Removed 'Tool Length' and 'Table Diameter' inputs as they are no longer required for pure angle resolution.",
+                    "Implemented Kåsa circle-fit algorithm to accurately derive pivot and calculate sweep scaling."
+                ] 
+            },
+            { 
+                id: 9, 
+                author: "Admin", 
+                date: "Aug 21, 2026", 
+                notes: [
+                    "Corrected Squareness and Tilt procedures to strictly enforce Right Hand Rule kinematics (Horizontal machine architecture).",
+                    "Permanently sealed HTML containers and locked Next Step handoff buttons to resolve UI bleed bugs.",
+                    "Hardened step-sequence from 1 to 10 ensuring accurate procedural flow."
+                ] 
+            },
+            { 
+                id: 8, 
+                author: "Admin", 
+                date: "Aug 21, 2026", 
+                notes: [
+                    "Injected 3 new foundational procedures: Mechanical Backlash, Linear Resolution, and Linear Squareness.",
+                    "Restructured the master handoff flow to guarantee mechanics and scaling are verified before spatial alignment.",
+                    "Added split Q Proxy / Mill Proxy logic card for Linear Resolution scaling."
+                ] 
+            },
+            { 
+                id: 4, 
+                author: "Admin", 
+                date: "Aug 21, 2026", 
+                notes: [
+                    "Reorganized flow: Tram -> Tilt -> Spindle Offsets -> Rotary Table Centers -> Toolbump.", 
+                    "Added explicit dependency explanations to section headers to prevent tech tail-chasing.",
+                    "Added Analog (Mill Proxy) vs Digital (Q Proxy) distinction for Tilt Axis procedures."
+                ] 
+            },
+            { 
+                id: 1, 
+                author: "Admin", 
+                date: "Aug 20, 2026", 
+                notes: [
+                    "Guide creation.", 
+                    "Merged Tram, Tilt Axis, Spindle Offsets, Toolbump, and Rotary Centers procedures into a unified single-page application."
+                ] 
+            }
+        ];
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem(LOGS_KEY)) {
+                localStorage.setItem(LOGS_KEY, JSON.stringify(INITIAL_LOGS));
+            }
+            
+            loadSavedContent();
+            loadLogs();
+            updateLastModifiedDisplay();
+            initCalculator(); 
+            initImageModal();
+            
+            // Intercept paste to prevent HTML formatting corruption
+            document.getElementById('editable-content-wrapper').addEventListener('paste', function(e) {
+                if (isEditing && e.target.closest('[contenteditable="true"]')) {
+                    e.preventDefault();
+                    let text = (e.originalEvent || e).clipboardData.getData('text/plain');
+                    document.execCommand('insertText', false, text);
+                }
+            });
+        });
+
+        // --- Navigation Logic ---
+        function switchGuide(guideId) {
+            if (isEditing) {
+                alert("Please save your edits before navigating to a different guide.");
+                return;
+            }
+
+            document.querySelectorAll('.guide-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            const target = document.getElementById(guideId);
+            if(target) target.classList.add('active');
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('border-primary-500', 'bg-primary-800', 'text-white', 'font-medium');
+                link.classList.add('border-transparent', 'text-slate-300');
+            });
+            
+            const activeLink = document.getElementById('nav-' + guideId);
+            if(activeLink) {
+                activeLink.classList.remove('border-transparent', 'text-slate-300');
+                activeLink.classList.add('border-primary-500', 'bg-primary-800', 'text-white', 'font-medium');
+            }
+
+            document.querySelector('main').scrollTo(0, 0);
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar').classList.add('-translate-x-full');
+            }
+        }
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('-translate-x-full');
+        });
+
+        // --- Edit Mode Logic ---
+        function toggleEditMode() {
+            isEditing = !isEditing;
+            const body = document.body;
+            const editableTargets = document.querySelectorAll('.edit-target');
+            const resetBtn = document.getElementById('reset-guide-btn');
+            
+            const fab = document.getElementById('fab-edit');
+            const fabIconEdit = document.getElementById('fab-icon-edit');
+            const fabIconSave = document.getElementById('fab-icon-save');
+            const fabText = document.getElementById('fab-text');
+
+            if (isEditing) {
+                body.classList.add('editing');
+                editableTargets.forEach(el => el.setAttribute('contenteditable', 'true'));
+                
+                fab.classList.replace('bg-primary-600', 'bg-emerald-600');
+                fab.classList.replace('hover:bg-primary-700', 'hover:bg-emerald-500');
+                fabIconEdit.classList.add('hidden');
+                fabIconSave.classList.remove('hidden');
+                fabText.innerText = 'Save Changes';
+                
+                resetBtn.classList.remove('hidden');
+            } else {
+                body.classList.remove('editing');
+                editableTargets.forEach(el => el.removeAttribute('contenteditable'));
+                
+                fab.classList.replace('bg-emerald-600', 'bg-primary-600');
+                fab.classList.replace('hover:bg-emerald-500', 'hover:bg-primary-700');
+                fabIconSave.classList.add('hidden');
+                fabIconEdit.classList.remove('hidden');
+                fabText.innerText = 'Edit Guide';
+                
+                resetBtn.classList.add('hidden');
+                
+                setTimeout(() => {
+                    const changeNote = prompt("Save successful! Please enter a brief description of the changes for the Activity Log (or click cancel to skip):");
+                    if (changeNote && changeNote.trim() !== "") {
+                        logChange(changeNote.trim());
+                    }
+                }, 100);
+                
+                saveContent();
+            }
+        }
+
+        // --- Data Persistence ---
+        function saveContent() {
+            const contentHTML = document.getElementById('editable-content-wrapper').innerHTML;
+            localStorage.setItem(CONTENT_KEY, contentHTML);
+            
+            const dateStr = getFormattedDate();
+            localStorage.setItem(DATE_KEY, dateStr);
+            updateLastModifiedDisplay();
+        }
+
+        function loadSavedContent() {
+            const savedContent = localStorage.getItem(CONTENT_KEY);
+            if (savedContent) {
+                const wrapper = document.getElementById('editable-content-wrapper');
+                const activeSection = wrapper.querySelector('.guide-section.active');
+                const activeId = activeSection ? activeSection.id : 'guide-backlash';
+                
+                wrapper.innerHTML = savedContent;
+                
+                document.querySelectorAll('.guide-section').forEach(sec => sec.classList.remove('active'));
+                const target = document.getElementById(activeId);
+                if (target) target.classList.add('active');
+            }
+        }
+
+        function resetToFactory() {
+            if (confirm("Are you sure you want to revert all edits back to the factory default? This cannot be undone.")) {
+                localStorage.removeItem(CONTENT_KEY);
+                localStorage.removeItem(LOGS_KEY);
+                localStorage.removeItem(DATE_KEY);
+                location.reload();
+            }
+        }
+
+        function updateLastModifiedDisplay() {
+            const dateStr = localStorage.getItem(DATE_KEY) || getFormattedDate();
+            const display = document.getElementById('last-updated-text');
+            display.innerText = `Last Updated: ${dateStr}`;
+        }
+
+        // --- Activity Log Logic ---
+        function logChange(notes) {
+            const dateStr = getFormattedDate();
+            const logEntry = { id: Date.now(), author: "Admin", date: dateStr, notes: [notes] };
+            
+            let logs = JSON.parse(localStorage.getItem(LOGS_KEY) || '[]');
+            logs.unshift(logEntry);
+            
+            localStorage.setItem(LOGS_KEY, JSON.stringify(logs));
+            localStorage.setItem(DATE_KEY, dateStr);
+            
+            updateLastModifiedDisplay();
+            loadLogs();
+        }
+
+        function loadLogs() {
+            const container = document.getElementById('log-container');
+            if (!container) return; 
+
+            const logs = JSON.parse(localStorage.getItem(LOGS_KEY) || '[]');
+            
+            if (logs.length === 0) {
+                container.innerHTML = `<div class="text-center text-slate-500 py-8 text-sm">No activity logged yet.</div>`;
+                return;
+            }
+            
+            container.innerHTML = logs.map(log => {
+                let bullets = Array.isArray(log.notes) ? log.notes : [log.notes];
+                
+                let notesHTML = `<ul class="list-disc pl-5 space-y-2 text-sm text-slate-700 leading-relaxed">` + 
+                    bullets.map(note => `<li>${note}</li>`).join('') + 
+                    `</ul>`;
+
+                return `
+                    <div class="flex flex-col md:grid md:grid-cols-12 gap-2 md:gap-4 px-6 py-5 hover:bg-slate-50 transition-colors">
+                        <div class="md:col-span-2 text-sm text-slate-600 font-mono pt-1">${log.date}</div>
+                        <div class="md:col-span-2 font-bold text-slate-800 text-sm md:pt-0.5">${log.author}</div>
+                        <div class="md:col-span-8 mt-2 md:mt-0">
+                            ${notesHTML}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // --- Interactive Scaling Calculator Logic ---
+        function initCalculator() {
+            const ctrlInput = document.getElementById('calc-control');
+            const actInput = document.getElementById('calc-actual');
+            const ratioInput = document.getElementById('calc-ratio');
+            const multDisplay = document.getElementById('calc-multiplier-result');
+            const finalDisplay = document.getElementById('calc-final-result');
+
+            if(!ctrlInput || !actInput || !ratioInput) return;
+
+            function calculateResolution() {
+                const ctrl = parseFloat(ctrlInput.value);
+                const act = parseFloat(actInput.value);
+                const currentRatio = parseFloat(ratioInput.value);
+
+                if (!isNaN(ctrl) && !isNaN(act) && !isNaN(currentRatio) && act !== 0) {
+                    const multiplier = ctrl / act;
+                    const newRatio = Math.round(multiplier * currentRatio);
+                    
+                    multDisplay.innerText = multiplier.toFixed(10);
+                    finalDisplay.innerText = newRatio.toLocaleString('en-US');
+                } else {
+                    multDisplay.innerText = "0.0000000000";
+                    finalDisplay.innerText = "---";
+                }
+            }
+
+            ctrlInput.addEventListener('input', calculateResolution);
+            actInput.addEventListener('input', calculateResolution);
+            ratioInput.addEventListener('input', calculateResolution);
+        }
+
+        // --- Kinematic Tilt Resolution Calculator Logic ---
+        function calculateKinematics() {
+            let points = [];
+            let tVals = [];
+            
+            // Gather inputs
+            for (let i = 0; i < 5; i++) {
+                let y = parseFloat(document.getElementById('kin-y-' + i).value);
+                let z = parseFloat(document.getElementById('kin-z-' + i).value);
+                let t = parseFloat(document.getElementById('kin-t-' + i).value);
+                
+                if (isNaN(y) || isNaN(z) || isNaN(t)) {
+                    alert("Please fill out all 15 coordinate values for the 5-point sweep.");
+                    return;
+                }
+                points.push({y: y, z: z});
+                tVals.push(t);
+            }
+
+            // Kåsa Circle Fit Algorithm (Algebraic Least Squares)
+            let sumY = 0, sumZ = 0, sumY2 = 0, sumZ2 = 0, sumYZ = 0;
+            let sumW = 0, sumWY = 0, sumWZ = 0;
+            let N = points.length;
+
+            points.forEach(p => {
+                let y = p.y;
+                let z = p.z;
+                let w = y*y + z*z;
+                sumY += y;
+                sumZ += z;
+                sumY2 += y*y;
+                sumZ2 += z*z;
+                sumYZ += y*z;
+                sumW += w;
+                sumWY += w*y;
+                sumWZ += w*z;
+            });
+
+            // Set up matrix components
+            let M11 = sumY2, M12 = sumYZ, M13 = sumY;
+            let M21 = sumYZ, M22 = sumZ2, M23 = sumZ;
+            let M31 = sumY,  M32 = sumZ,  M33 = N;
+
+            let B1 = -sumWY;
+            let B2 = -sumWZ;
+            let B3 = -sumW;
+
+            // Determinant
+            let detM = M11*(M22*M33 - M23*M32) - M12*(M21*M33 - M23*M31) + M13*(M21*M32 - M22*M31);
+
+            if (Math.abs(detM) < 1e-10) {
+                alert("Data Error: The points entered form a straight line or are invalid. Cannot calculate a pivot arc.");
+                return;
+            }
+
+            // Cramer's rule for A and B
+            let detA = B1*(M22*M33 - M23*M32) - M12*(B2*M33 - M23*B3) + M13*(B2*M32 - M22*B3);
+            let detB = M11*(B2*M33 - M23*B3) - B1*(M21*M33 - M23*M31) + M13*(M21*B3 - B2*M31);
+
+            let A = detA / detM;
+            let B = detB / detM;
+
+            // Calculated Pivot Center
+            let Yc = -A / 2;
+            let Zc = -B / 2;
+
+            // Calculate Angle between Row 1 (-15 deg) and Row 4 (+15 deg)
+            let v0y = points[1].y - Yc;
+            let v0z = points[1].z - Zc;
+            let v4y = points[4].y - Yc;
+            let v4z = points[4].z - Zc;
+
+            // Dot Product and Magnitude for exact angle computation
+            let dot = (v0y * v4y) + (v0z * v4z);
+            let mag0 = Math.sqrt(v0y*v0y + v0z*v0z);
+            let mag4 = Math.sqrt(v4y*v4y + v4z*v4z);
+
+            let cosTheta = dot / (mag0 * mag4);
+            
+            // Clamp to [-1, 1] to prevent NaN from JS floating point rounding errors
+            cosTheta = Math.max(-1, Math.min(1, cosTheta));
+
+            let actualAngleRad = Math.acos(cosTheta);
+            let actualAngleDeg = actualAngleRad * (180 / Math.PI);
+
+            // Measured Angle Difference (Row 4 minus Row 1)
+            let measuredAngleDeg = Math.abs(tVals[4] - tVals[1]);
+
+            // Resolution Multiplier
+            let multiplier = measuredAngleDeg / actualAngleDeg;
+
+            // Bind to UI
+            const uiActual = document.getElementById('res-tilt-actual');
+            const uiMeasured = document.getElementById('res-tilt-measured');
+            const uiMultiplier = document.getElementById('res-tilt-multiplier');
+
+            uiActual.innerText = actualAngleDeg.toFixed(4) + '°';
+            uiMeasured.innerText = measuredAngleDeg.toFixed(4) + '°';
+            uiMultiplier.innerText = multiplier.toFixed(6);
+
+            // Visual feedback flash
+            [uiActual, uiMeasured, uiMultiplier].forEach(el => {
+                el.classList.add('bg-primary-200', 'transition-colors', 'duration-300');
+                setTimeout(() => el.classList.remove('bg-primary-200'), 500);
+            });
+        }
+
+        // --- Image Lightbox Logic ---
+        function initImageModal() {
+            const modal = document.getElementById('image-lightbox-modal');
+            const modalImg = document.getElementById('img-modal-target');
+            const closeBtn = modal.querySelector('.img-modal-close');
+
+            // Event Delegation: Listen for clicks on ANY image inside the main wrapper
+            document.getElementById('editable-content-wrapper').addEventListener('click', function(e) {
+                if (e.target && e.target.tagName === 'IMG' && !e.target.closest('#image-lightbox-modal')) {
+                    modal.classList.add('show');
+                    modalImg.src = e.target.src;
+                }
+            });
+
+            // Close functionality
+            const closeModal = () => modal.classList.remove('show');
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal || e.target === modalImg) closeModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
+            });
+        }
+    </script>
+</body>
+</html>
